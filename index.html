@@ -15,28 +15,28 @@
     <script type="text/javascript" src="./js/main.js"></script>
 </head>
 <body>
-
     <div id="start" data-role="page">
 
         <div id="start-header" data-role="header" data-position="fixed">
-            <h1>조명</h1>
+            <h1>텔레비전</h1>
         </div>
 
         <div id="start-content" data-role="content" data-scroll="none">
             <div class="box">
 				<div data-role="button" class="ui-btn-start" id="turnOnButton" style="display: none;">Turn bluetooth on</div>
                 <div data-role="button" class="ui-btn-start" id="clientButton" style="display: none;">Join server</div>
-				
-				
-                <img src="res/home.png" width="340" height="300">
-                </div>
-				<img src="res/bulb_on.png" id="bedRoom1" style="position: absolute; top:180px; left:75px;" onclick="changeBedRoom1()">
-				<img src="res/bulb_on.png" id="bedRoom2" style="position: absolute; top:170px; left:225px;" onclick="changeBedRoom2()">
-				<img src="res/bulb_on.png" id="bedRoom3" style="position: absolute; top:360px; left:223px;" onclick="changeBedRoom3()">
-				<img src="res/bulb_on.png" id="livingRoom" style="position: absolute; top:310px; left:95px;" onclick="changeLivingRoom()">
-				<img src="res/bulb_on.png" id="kitchen" style="position: absolute; top:260px; left:205px;" onclick="changeKitchen()">
+				</div>
             </div>
         </div>
+		
+		
+		<div id="tvPage" data-role="page">
+		<img src="res/tv_off.png" id="tv" width="340" height="300" style="position: absolute; top:150px; left:10px;" onclick="changeTv()">
+		<h1 style="position: absolute; top:430px; left:10px;">볼륨 : </h1>
+		<h1><div id="volumeValue" style="position: absolute; top:460px; left:130px;">0</div></h1>
+		<h1 style="position: absolute; top:490px; left:10px;">채널 : </h1>
+		<h1><div id="channelValue" style="position: absolute; top:520px; left:130px;">0</div></h1>
+		</div>
 
     </div>
 
@@ -51,67 +51,16 @@
 
 	
 <script type="text/javascript">
-	function changeBedRoom1(){
-if (document.getElementById("bedRoom1").src.indexOf('bulb_on.png')!=-1)
+	function changeTv(){
+if (document.getElementById("tv").src.indexOf('tv_off')!=-1)
         {
-        document.getElementById("bedRoom1").src = "res/bulb_off.png";
+        document.getElementById("tv").src = "res/tv_on.png";
 		}
 		else
 		{
-		document.getElementById("bedRoom1").src = "res/bulb_on.png";
-		}
-      }
-	  
-	  function changeBedRoom2(){
-if (document.getElementById("bedRoom2").src.indexOf('bulb_on.png')!=-1)
-        {
-        document.getElementById("bedRoom2").src = "res/bulb_off.png";
-		}
-		else
-		{
-		document.getElementById("bedRoom2").src = "res/bulb_on.png";
-		}
-      }
-	  
-	  function changeBedRoom3(){
-if (document.getElementById("bedRoom3").src.indexOf('bulb_on.png')!=-1)
-        {
-        document.getElementById("bedRoom3").src = "res/bulb_off.png";
-		}
-		else
-		{
-		document.getElementById("bedRoom3").src = "res/bulb_on.png";
-		}
-      }
-	  
-	  function changeLivingRoom(){
-if (document.getElementById("livingRoom").src.indexOf('bulb_on.png')!=-1)
-        {
-        document.getElementById("livingRoom").src = "res/bulb_off.png";
-		}
-		else
-		{
-		document.getElementById("livingRoom").src = "res/bulb_on.png";
-		}
-      }
-	  
-	  function changeKitchen(){
-if (document.getElementById("kitchen").src.indexOf('bulb_on.png')!=-1)
-        {
-        document.getElementById("kitchen").src = "res/bulb_off.png";
-		}
-		else
-		{
-		document.getElementById("kitchen").src = "res/bulb_on.png";
+		document.getElementById("tv").src = "res/tv_off.png";
 		}
       }
 </script>
 </body>
-
-
-<!--
- $("#bedRoom1").click(function(){
-	$("#bedRoom1").html("<div id="bedRoom1" style="position: absolute; top:160px; left:85px; width:200px; height:25px"><img src="res/bulb_off.png"></div>");
-	});
-}); -->
 </html>

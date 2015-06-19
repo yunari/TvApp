@@ -136,7 +136,7 @@ function Ui(callback) {
                 serverName = this.escape(serverName);
                 $('#chat').data('serverName', serverName);
             }
-            $.mobile.changePage('#chat');
+            $.mobile.changePage('#tvPage');
         },
 
         /**
@@ -272,7 +272,8 @@ function Ui(callback) {
             ping,
             bye
         ) {
-            var listElement, ul;
+            var listElement, ul, temp;
+			var message = '';
             text = decodeURIComponent(text);
             name = decodeURIComponent(name);
             name = this.escape(name);
@@ -283,13 +284,73 @@ function Ui(callback) {
                 this.setHeaderType('server - connected with ' + name);
                 this.checkSendButtonState();
             } else {
-                listElement = this.templateManager.get('left_bubble', {
-                    'text': text
-                });
-                ul = $('#chat-content > .ui-scrollview-view > ul');
-                ul.append(listElement);
-                ul.listview('refresh');
-            }
+				if (text.indexOf('현재')!=-1 && text.indexOf('상태')!=-1)
+				{
+				if (document.getElementById("tv").src.indexOf('tv_on.png')!==-1)
+					{
+						message = message.concat('현재 텔레비전은 켜져있고 ');
+					}
+					else
+					{
+						message = message.concat('현재 텔레비전이 꺼져있습니다.');
+						app.sendMessage(message);
+						return;
+					}
+					
+					message = message.concat('볼륨: ' + parseInt($('#volumeValue').text(), 10) + ', 채널: ' + parseInt($('#channelValue').text(), 10) + ' 입니다.');
+					app.sendMessage(message);
+					
+            } //현재 상태 불러오기
+			
+			if (text.indexOf('볼륨')!=-1 && (text.indexOf('올려')!=-1 || text.indexOf('높여')!=-1)){
+			 temp = parseInt($('#volumeValue').text(), 10);
+			 
+			 if (temp === 30)
+				 return;
+			 else
+				 temp = temp + 1;
+			 
+			 $('#volumeValue').html(temp);
+         }
+		 if (text.indexOf('볼륨')!=-1 && (text.indexOf('내려')!=-1 || text.indexOf('낮춰')!=-1)){
+			 temp = parseInt($('#volumeValue').text(), 10);
+			 
+			 if (temp === 0)
+				 return;
+			 else
+				 temp = temp - 1;
+			 
+			 $('#volumeValue').html(temp);
+         }
+		 if (text.indexOf('채널')!=-1 && (text.indexOf('올려')!=-1 || text.indexOf('높여')!=-1)){
+			 temp = parseInt($('#channelValue').text(), 10);
+			 
+			 if (temp === 30)
+				 return;
+			 else
+				 temp = temp + 1;
+			 
+			 $('#channelValue').html(temp);
+         }
+		 if (text.indexOf('채널')!=-1 && (text.indexOf('내려')!=-1 || text.indexOf('낮춰')!=-1)){
+			 temp = parseInt($('#channelValue').text(), 10);
+			 
+			 if (temp === 0)
+				 return;
+			 else
+				 temp = temp - 1;
+			 
+			 $('#channelValue').html(temp);
+         }
+		 if ((text.indexOf('티비')!=-1 || text.indexOf('텔레비전')!=-1 || text.indexOf('tv')!=-1 || text.indexOf('TV')!=-1 || text.indexOf('Tv')!=-1) && text.indexOf('켜')!=-1){
+			 document.getElementById("tv").src = "res/tv_on.png"
+         }
+		 if ((text.indexOf('티비')!=-1 || text.indexOf('텔레비전')!=-1 || text.indexOf('tv')!=-1 || text.indexOf('TV')!=-1 || text.indexOf('Tv')!=-1) && text.indexOf('꺼')!=-1){
+			 document.getElementById("tv").src = "res/tv_off.png"
+         }
+			
+			
+			}
         },
 
         /**

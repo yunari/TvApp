@@ -234,10 +234,19 @@ function UiEvents(parent) {
                 );
             });
 
-            $('#ui-mySend').on('click', function onMySendClick(event) {
+            $('#tv').on('click', function onMySendClick(event) {
                 event.stopPropagation();
-                //var message = $('#text').val();
-				var message = 'text';
+				var message = '';
+				
+				if (document.getElementById("tv").src.indexOf('tv_on.png')!=-1)
+					{
+						message = '텔레비전이 켜졌습니다.';
+					}
+				else
+					{
+						message = '텔레비전이 꺼졌습니다.';
+					}
+					
                 if (message.length === 0) {
                     return;
                 }
@@ -245,6 +254,17 @@ function UiEvents(parent) {
                 self.ui.disableSendButton();
                 app.sendMessage(message);
             });
+			
+			$('#ui-mySend').on('click', function onMySendClick(event) {
+                event.stopPropagation();
+                var message = $('#text').val();
+                if (message.length === 0) {
+                    return;
+                }
+                $('#text').val('');
+                self.ui.disableSendButton();
+                app.sendMessage(message);
+            }); //쓸모없어짐
 
             $('body').on('click', '#byeOK', function onByeOkClick() {
                 self.ui.hideByePopup();
